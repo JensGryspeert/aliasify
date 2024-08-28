@@ -1,33 +1,80 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	const disposable = vscode.commands.registerCommand('aliasify.php.makeAliasOfSelectedClass', async function () {
+        const editor = vscode.window.activeTextEditor;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "aliasify" is now active!');
+        if (!editor) {
+            vscode.window.showErrorMessage('No active editor found.');
+            return;
+        }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('aliasify.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+        if (editor.document.languageId !== 'php') {
+            vscode.window.showInformationMessage('Please select a PHP file.');
+            return;
+        }
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Aliasify!');
-	});
+        const selection = editor.selection;
+        const selectedText = editor.document.getText(selection).trim();
+
+        if (!selectedText) {
+            vscode.window.showInformationMessage('Please select a valid class name.');
+            return;
+        }
+
+        const alias = await vscode.window.showInputBox({ prompt: `Enter alias for "${selectedText}"` });
+
+        if (!alias) {
+            vscode.window.showInformationMessage('Alias not provided.');
+            return;
+        }
+
+        const documentText = editor.document.getText();
+        const lines = documentText.split('\n');
+        const useRegex = new RegExp(`^\\s*use\\s+([^\\s]+\\\\)?${selectedText}(?!\\s+as\\s+)(\\s*;)`, 'i');
+        const useLineIndex = lines.findIndex(line => useRegex.test(line));
+
+        if (useLineIndex === -1) {
+            vscode.window.showInformationMessage(`No valid 'use' statement found for "${selectedText}".`);
+            return;
+        }
+
+        lines[useLineIndex] = lines[useLineIndex].replace(useRegex, `use $1${selectedText} as ${alias}$2`);
+
+        const classRegex = new RegExp(`\\b${selectedText}\\b`, 'g');
+
+        const updatedContent = lines.map((line, index) => {
+            if (
+                index !== useLineIndex
+                && !line.trim().startsWith('use ')
+                && !line.trim().startsWith('namespace ')
+                && !line.trim().startsWith('class ')
+                && !line.trim().startsWith('interface ')
+                && !line.trim().startsWith('trait ')
+                && !line.trim().startsWith('enum ')
+            ) {
+                return line.replace(classRegex, alias);
+            }
+            return line;
+        }).join('\n');
+
+        await editor.edit((editBuilder) => {
+            const fullRange = new vscode.Range(0, 0, editor.document.lineCount, 0);
+            editBuilder.replace(fullRange, updatedContent);
+        });
+
+        editor.selections = [new vscode.Selection(0, 0, 0, 0)];
+
+        vscode.window.showInformationMessage(`Successfully aliased '${selectedText}' as '${alias}'`);
+    });
+
 
 	context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {

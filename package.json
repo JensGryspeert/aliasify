@@ -13,8 +13,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "aliasify.helloWorld",
-      "title": "Hello World"
+    "command": "aliasify.php.makeAliasOfSelectedClass",
+    "title": "PHP: Make Alias of Selected Class"
     }]
   },
   "scripts": {
