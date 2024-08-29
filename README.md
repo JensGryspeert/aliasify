@@ -1,65 +1,51 @@
-# aliasify README
+# Aliasify 🌟
 
-This is the README for your extension "aliasify". After writing up a brief description, we recommend including the following sections.
+**Aliasify** is a Visual Studio Code extension that simplifies PHP development by allowing you to create aliases for selected PHP classes with ease. Boost your productivity and keep your code clean, organized, and easy to manage!
 
-## Features
+![Aliasify Demo](./assets/aliasify-demo.gif)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 🚀 Features
 
-For example if there is an image subfolder under your extension project workspace:
+- **Quick Alias Creation**: Generate aliases for any selected PHP class with just a few clicks.
+- **Customizable Naming**: Tailor alias names to match your coding standards and preferences.
+- **Effortless Integration**: Seamlessly integrates with Visual Studio Code and other extensions.
+- **Time-Saving Shortcuts**: Reduce repetitive tasks and speed up your development workflow.
+- **Lightweight & Fast**: Designed to be efficient and easy to use without any bloat.
 
-\!\[feature X\]\(images/feature-x.png\)
+## 📦 Installation
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window.
+3. Search for **Aliasify**.
+4. Click **Install**.
 
-## Requirements
+Or install directly from the [Visual Studio Code Marketplace](#).
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 🛠️ Usage
 
-## Extension Settings
+1. **Select** the PHP class you want to create an alias for.
+2. **Right-click** and choose `PHP: Create an alias for the selected class` from the context menu.
+3. **Customize** the alias name (optional) and hit **Enter**.
+4. The alias is now created and ready for use in your code!
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+![Aliasify Usage](./assets/aliasify-usage.gif)
 
-For example:
+## 🧩 Keybindings
 
-This extension contributes the following settings:
+Aliasify also comes with customizable keybindings to make alias creation even faster:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- **`Ctrl+Shift+A`**: Create an alias for the selected class.
 
-## Known Issues
+You can change these keybindings in the **Keyboard Shortcuts** menu in VS Code.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## 🤝 Contributing
 
-## Release Notes
+Contributions are welcome! If you have ideas for improvements, bug reports, or feature requests, feel free to open an issue or submit a pull request.
 
-Users appreciate release notes as you update your extension.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+##
