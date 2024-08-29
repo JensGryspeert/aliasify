@@ -1,34 +1,45 @@
 {
-  "name": "aliasify",
-  "displayName": "Aliasify",
-  "description": "Aliasify is a powerful yet simple Visual Studio Code extension designed to streamline your PHP development workflow. With just a few clicks, Aliasify allows you to create clean and concise aliases for selected PHP classes, helping you keep your code organized and easy to manage.",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.92.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
-  "main": "./extension.js",
-  "contributes": {
-    "commands": [{
-    "command": "aliasify.php.makeAliasOfSelectedClass",
-    "title": "PHP: Make Alias of Selected Class"
-    }]
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.92.0",
-    "@types/mocha": "^10.0.7",
-    "@types/node": "20.x",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
-    "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
-  }
+    "name": "aliasify",
+    "displayName": "Aliasify",
+    "description": "Aliasify is a powerful yet simple Visual Studio Code extension designed to streamline your PHP development workflow. With just a few clicks, Aliasify allows you to create clean and concise aliases for selected PHP classes, helping you keep your code organized and easy to manage.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.92.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "aliasify.php.makeAliasOfSelectedClass",
+                "title": "PHP: Create an alias for the selected class"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "aliasify.php.makeAliasOfSelectedClass",
+                    "when": "editorLangId == php",
+                    "group": "navigation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.92.0",
+        "@types/mocha": "^10.0.7",
+        "@types/node": "20.x",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5",
+        "@vscode/test-cli": "^0.0.9",
+        "@vscode/test-electron": "^2.4.0"
+    }
 }
